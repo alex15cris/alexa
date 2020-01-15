@@ -93,14 +93,59 @@ public class MetodoPasajero {
         return vPrincipal;
     }
     
-    public void EditaPasajero(){
+    public void EditaPasajero(String unaRuta){
     
-        //FALTA
+        try {
+            FileReader fr = new FileReader("C:\\Rutas.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String d;
+            while ((d=br.readLine())!=null){
+                StringTokenizer dato = new StringTokenizer (d,"|");
+                Vector x = new Vector();
+                while (dato.hasMoreTokens()){
+                    x.addElement(dato.nextToken());
+                    }
+                        String a = x.elementAt(1).toString();
+                        if(a.equals(unaRuta)){
+                            vPrincipal=x;   
+                            x.equals(unaRuta);
+                            System.out.println(vPrincipal);     
+                }
+            }br.close();
+            fr.close();
+        }catch (Exception e){
+        JOptionPane.showMessageDialog(null, e);
+        }       
     }
     
-    public void EliminarPasajero(){
+    public void EliminarPasajero(String rutas){
     
-        //FALTA
+        try
+        {
+            FileReader fr = new FileReader("C:\\Rutas.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String d;
+            while ((d=br.readLine())!=null){
+                StringTokenizer dato = new StringTokenizer (d,"|");
+                Vector x = new Vector();
+                while (dato.hasMoreTokens()){
+                    x.addElement(dato.nextToken());
+                    }
+                    String a = x.elementAt(1).toString();
+                    // Comprovamos si el fichero existe  de ser así procedemos a borrar el archivo
+                    if(a.equals(rutas))
+                    {
+                        vPrincipal=x;
+                        x.clear();
+                        System.out.println("Fichero Borrado");
+                    }
+                    br.close();
+                    fr.close();
+        }
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
     
 }
